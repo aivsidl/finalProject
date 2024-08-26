@@ -1,5 +1,10 @@
 
-using FinalProject.API.Database;
+
+using FinalProject.BusinessLayer.Services;
+using FinalProject.BusinessLayer.Services.Interfaces;
+using FinalProject.DataLayer.Data;
+using FinalProject.DataLayer.Repositories;
+using FinalProject.DataLayer.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.API
@@ -17,10 +22,13 @@ namespace FinalProject.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<ExampleDbContext>(options => 
+            builder.Services.AddDbContext<ApplicationDbContext>(options => 
             {
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
 
             var app = builder.Build();
 
