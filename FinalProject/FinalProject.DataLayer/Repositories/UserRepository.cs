@@ -16,7 +16,7 @@ namespace FinalProject.DataLayer.Repositories
         public async Task AddAsync(User user)
         {
             await this.context.Users.AddAsync(user);
-           
+            await this.context.SaveChangesAsync();
         }
         
     }

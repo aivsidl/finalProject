@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject.BusinessLayer.Models
 {
-
-    public class UserDto
+    public class RegisterUser : UserDto
     {
-        public string UserName { get; set; }
-
-        public string Password { get; set; }
+      public string CheckPassword { get; set; }
 
     }
 }

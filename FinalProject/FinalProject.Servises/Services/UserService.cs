@@ -1,7 +1,9 @@
-﻿using FinalProject.BusinessLayer.Models;
+﻿using FinalProject.BusinessLayer.Infrastructure.Validators;
+using FinalProject.BusinessLayer.Models;
 using FinalProject.BusinessLayer.Services.Interfaces;
 using FinalProject.DataLayer.Models;
 using FinalProject.DataLayer.Repositories.Interfaces;
+using FluentValidation;
 using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
@@ -18,9 +20,18 @@ namespace FinalProject.BusinessLayer.Services
         {
            _userRepository = userRepository;
         }
-        public async Task AddAsync(UserDto userDto)
+        public async Task AddAsync(RegisterUser registerUser)
         {
-            await _userRepository.AddAsync(new User { UserName = userDto.UserName }) ;           
+            var validator = new RegistrationValidator();
+            var validationResult = await validator.ValidateAsync(registerUser);
+
+            if (!validationResult.IsValid) 
+            {
+               await validator.ValidateAndThrowAsync(registerUser);
+                    
+            }
+
+            await _userRepository.AddAsync(new User { UserName = registerUser.UserName, Password = registerUser.Password  }) ;           
         }
     }
 }

@@ -16,9 +16,10 @@ namespace FinalProject.API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddAsync(UserDto userDto)
+        [Route("register")]
+        public async Task<ActionResult> RegisterAsync(RegisterUser registerUser)
         {
-            await _userService.AddAsync(userDto);
+            await _userService.AddAsync(registerUser);
             return Ok();
 
         }
