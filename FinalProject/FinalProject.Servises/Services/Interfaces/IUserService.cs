@@ -10,5 +10,7 @@ namespace FinalProject.BusinessLayer.Services.Interfaces
     public interface IUserService
     {
         public Task AddAsync(RegisterUser registerUser);
+
+        public Task<string> LoginAsync(UserDto userDto);
     }
 }

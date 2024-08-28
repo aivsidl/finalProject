@@ -9,6 +9,8 @@ namespace FinalProject.DataLayer.Models
         public string UserName { get; set; }
         [Required, MaxLength(50)]
         public string Password { get; set; }
+
+        public string Salt { get; set; }
        
         public Role Role { get; set; } = Role.User;
 

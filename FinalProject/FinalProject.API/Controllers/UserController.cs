@@ -9,17 +9,17 @@ namespace FinalProject.API.Controllers
     [Route("api/[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IUserService _userService;
+        private readonly IUserService userService;
         public UserController(IUserService userService)
         {
-            _userService = userService;
+            this.userService = userService;
         }
 
         [HttpPost]
         [Route("register")]
         public async Task<ActionResult> RegisterAsync(RegisterUser registerUser)
         {
-            await _userService.AddAsync(registerUser);
+            await userService.AddAsync(registerUser);
             return Ok();
 
         }

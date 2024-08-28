@@ -1,6 +1,7 @@
 ﻿using FinalProject.DataLayer.Data;
 using FinalProject.DataLayer.Models;
 using FinalProject.DataLayer.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
 
 namespace FinalProject.DataLayer.Repositories
 {
@@ -18,6 +19,11 @@ namespace FinalProject.DataLayer.Repositories
             await this.context.Users.AddAsync(user);
             await this.context.SaveChangesAsync();
         }
-        
+
+        public async Task<User> GetUserByUsernameAsync(string username)
+        {
+            return await this.context.Users.SingleOrDefaultAsync(u=>u.UserName == username);
+
+        }
     }
 }

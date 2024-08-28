@@ -28,7 +28,7 @@ namespace FinalProject.API
             });
 
             builder.Services.AddScoped<IUserRepository, UserRepository>();
-            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserService, UserService>();            
 
             var app = builder.Build();
 
