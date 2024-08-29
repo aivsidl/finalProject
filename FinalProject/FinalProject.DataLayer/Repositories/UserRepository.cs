@@ -25,5 +25,10 @@ namespace FinalProject.DataLayer.Repositories
             return await this.context.Users.SingleOrDefaultAsync(u=>u.UserName == username);
 
         }
+
+        public async Task<User> GetUserByUsernameIdAsync(int id)
+        {
+            return await this.context.Users.SingleOrDefaultAsync(u => u.Id == id);
+        }
     }
 }

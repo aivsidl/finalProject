@@ -6,6 +6,8 @@ using FinalProject.BusinessLayer.Services.Interfaces;
 using FinalProject.DataLayer.Models;
 using FinalProject.DataLayer.Repositories.Interfaces;
 using FluentValidation;
+using FinalProject.BusinessLayer.Infrastructure.Exeptions;
+using System.Net;
 
 
 namespace FinalProject.BusinessLayer.Services
@@ -39,6 +41,21 @@ namespace FinalProject.BusinessLayer.Services
             var password = Hash.Create(registerUser.Password, salt);
             await userRepository.AddAsync(new User { UserName = registerUser.UserName, Password = password , Salt = salt }) ;           
         }
+        
+        
+        // to do: ------------------------------------- map  from user to userDto
+
+        public async Task<User> GetUserByIdAsync(int id)
+        { 
+            var a = await userRepository.GetUserByUsernameIdAsync(id);
+            if (a == null)
+            {
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"User with {id} not found");
+            }
+            return a;
+
+            
+        }
 
         public async Task<string> LoginAsync(UserDto userDto)
         {
@@ -59,10 +76,7 @@ namespace FinalProject.BusinessLayer.Services
             return token;
 
 
-
-
-
-
         }
+
     }
 }

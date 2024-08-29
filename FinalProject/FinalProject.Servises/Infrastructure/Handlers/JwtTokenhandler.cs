@@ -28,7 +28,7 @@ namespace FinalProject.BusinessLayer.Infrastructure.Handlers
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                        new Claim(ClaimTypes.Name, user.Id.ToString()),
+                        new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                         new Claim(ClaimTypes.Name, user.UserName),
                         new Claim(ClaimTypes.Role, user.Role.ToString())
                 }),

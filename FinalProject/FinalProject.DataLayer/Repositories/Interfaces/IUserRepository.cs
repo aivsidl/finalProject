@@ -7,5 +7,7 @@ namespace FinalProject.DataLayer.Repositories.Interfaces
         public Task AddAsync(User user);
 
         public Task<User> GetUserByUsernameAsync(string username);
+
+        public Task<User> GetUserByUsernameIdAsync(int id);
     }
 }
