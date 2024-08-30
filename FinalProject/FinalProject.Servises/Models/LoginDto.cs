@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace FinalProject.BusinessLayer.Models
 {
-    public class RegisterUser : LoginDto
+    public class LoginDto
     {
-      public string CheckPassword { get; set; }
+        public string UserName { get; set; }
 
+        public string Password { get; set; }
     }
 }

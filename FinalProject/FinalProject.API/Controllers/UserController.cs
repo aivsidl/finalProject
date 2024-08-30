@@ -1,8 +1,11 @@
-﻿using FinalProject.BusinessLayer.Models;
+﻿using FinalProject.API.Models;
+using FinalProject.BusinessLayer.Infrastructure.Exeptions;
+using FinalProject.BusinessLayer.Models;
 using FinalProject.BusinessLayer.Services;
 using FinalProject.BusinessLayer.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Security.Claims;
 
 namespace FinalProject.API.Controllers
@@ -28,9 +31,9 @@ namespace FinalProject.API.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<ActionResult> LoginAsync(UserDto userdto)
+        public async Task<ActionResult> LoginAsync(LoginDto loginDto)
         {            
-            return Ok(await userService.LoginAsync(userdto));
+            return Ok(await userService.LoginAsync(loginDto));
         }
 
 
@@ -59,6 +62,33 @@ namespace FinalProject.API.Controllers
         {
             return Ok(await userService.GetUserByIdAsync(id));
         }
+
+        [Authorize]
+        [HttpPost]
+        [Route("userInfo/{userId:int}")]
+
+        public async Task<ActionResult>AddUserInfoAsync(int userId, UserInfoRequest userInfoRequest)
+        {
+            var identity = HttpContext.User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                var currentUserId = int.Parse(identity.FindFirst(ClaimTypes.NameIdentifier).Value);
+                if (currentUserId != userId)
+                    {
+                    throw new StatusCodeException(HttpStatusCode.Unauthorized, $"Unauthorized action");
+                }
+
+            }
+
+            return Ok(await userService.UpdateUserInfoDtoAsync(userId, new UserInfoDto {
+                FirstName = userInfoRequest.FirstName,
+                LastName = userInfoRequest.LastName,
+                PersonalCode = userInfoRequest.PersonalCode,
+                Phone = userInfoRequest.Phone,
+                Email = userInfoRequest.Email,
+            } ));
+        }
+
     }
 }
     

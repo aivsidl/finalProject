@@ -12,8 +12,11 @@ namespace FinalProject.BusinessLayer.Services.Interfaces
     {
         public Task AddAsync(RegisterUser registerUser);
 
-        public Task<string> LoginAsync(UserDto userDto);
+        public Task<string> LoginAsync(LoginDto loginDto);
 
-        public Task<User> GetUserByIdAsync(int id);
+        public Task<UserDto> GetUserByIdAsync(int id);
+
+        public Task<int> UpdateUserInfoDtoAsync(int id, UserInfoDto userInfoDto);
+
     }
 }

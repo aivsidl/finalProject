@@ -20,6 +20,11 @@ namespace FinalProject.DataLayer.Repositories
             await this.context.SaveChangesAsync();
         }
 
+        public async Task<User> GetUserByUserLightIdAsync(int id)
+        {
+            return await this.context.Users.SingleOrDefaultAsync(u => u.Id == id);
+        }
+
         public async Task<User> GetUserByUsernameAsync(string username)
         {
             return await this.context.Users.SingleOrDefaultAsync(u=>u.UserName == username);
@@ -28,7 +33,22 @@ namespace FinalProject.DataLayer.Repositories
 
         public async Task<User> GetUserByUsernameIdAsync(int id)
         {
-            return await this.context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            return await this.context.Users.Include(x=>x.UserInfo)
+                .ThenInclude(x=>x.Adress)
+                .SingleOrDefaultAsync(u => u.Id == id);
+        }
+
+        public async Task<int> UpdateUserInfoAsync(int id, UserInfo userInfo)
+        {
+            var user = await this.context.Users.SingleOrDefaultAsync(u => u.Id == id);
+            if (user == null) 
+            {
+                throw new Exception();
+            }
+            user.UserInfo = userInfo;
+            await this.context.SaveChangesAsync();
+            return userInfo.Id;
+
         }
     }
 }

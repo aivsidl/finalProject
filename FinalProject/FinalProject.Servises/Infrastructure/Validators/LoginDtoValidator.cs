@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject.BusinessLayer.Infrastructure.Validators
 {
-    public class UserDtoValidator : AbstractValidator<UserDto>
+    public class LoginDtoValidator : AbstractValidator<LoginDto>
     {
-        public UserDtoValidator()
+        public LoginDtoValidator()
         {
             RuleFor(x => x.UserName).NotEmpty().WithMessage("Your Username field is empty?");
             RuleFor(x => x.Password).NotEmpty().WithMessage("Your Password field is empty?");        
