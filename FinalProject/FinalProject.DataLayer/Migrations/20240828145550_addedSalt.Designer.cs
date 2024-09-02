@@ -25,7 +25,7 @@ namespace FinalProject.DataLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FinalProject.DataLayer.Models.Adress", b =>
+            modelBuilder.Entity("FinalProject.DataLayer.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -136,11 +136,11 @@ namespace FinalProject.DataLayer.Migrations
                     b.ToTable("UsersInfo");
                 });
 
-            modelBuilder.Entity("FinalProject.DataLayer.Models.Adress", b =>
+            modelBuilder.Entity("FinalProject.DataLayer.Models.Address", b =>
                 {
                     b.HasOne("FinalProject.DataLayer.Models.UserInfo", "UserInfo")
-                        .WithOne("Adress")
-                        .HasForeignKey("FinalProject.DataLayer.Models.Adress", "UserInfoId")
+                        .WithOne("Address")
+                        .HasForeignKey("FinalProject.DataLayer.Models.Address", "UserInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -166,7 +166,7 @@ namespace FinalProject.DataLayer.Migrations
 
             modelBuilder.Entity("FinalProject.DataLayer.Models.UserInfo", b =>
                 {
-                    b.Navigation("Adress")
+                    b.Navigation("Address")
                         .IsRequired();
                 });
 #pragma warning restore 612, 618

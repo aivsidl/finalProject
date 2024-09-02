@@ -25,7 +25,7 @@ namespace FinalProject.DataLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("FinalProject.DataLayer.Models.Adress", b =>
+            modelBuilder.Entity("FinalProject.DataLayer.Models.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

@@ -63,21 +63,17 @@ namespace FinalProject.BusinessLayer.Services
                     PersonalCode = user.UserInfo.PersonalCode,
                     Phone = user.UserInfo.Phone,
                     Email = user.UserInfo.Email,
-                    UserAdressDto = user.UserInfo.Adress == null ? null : new UserAdressDto
+                    UserAdressDto = user.UserInfo.Address == null ? null : new UserAddressDto
                     {
-                        Id = user.UserInfo.Adress.Id,
-                        City = user.UserInfo.Adress.City,
-                        Street = user.UserInfo.Adress.Street,
-                        HouseNumber = user.UserInfo.Adress.HouseNumber,
-                        ApartamentNumber = user.UserInfo.Adress.ApartamentNumber
+                        Id = user.UserInfo.Address.Id,
+                        City = user.UserInfo.Address.City,
+                        Street = user.UserInfo.Address.Street,
+                        HouseNumber = user.UserInfo.Address.HouseNumber,
+                        ApartamentNumber = user.UserInfo.Address.ApartamentNumber
                     }
-
-
-                }
-               
+                }               
             };
 
-            
         }
 
         public async Task<string> LoginAsync(LoginDto loginDto)
@@ -100,7 +96,7 @@ namespace FinalProject.BusinessLayer.Services
 
         }
 
-        public async Task<int> UpdateUserInfoDtoAsync(int id, UserInfoDto userInfoDto)
+        public async Task UpdateUserInfoDtoAsync(int id, UserInfoDto userInfoDto)
         {
             var user = await userRepository.GetUserByUserLightIdAsync(id);
             if (user == null)
@@ -108,9 +104,8 @@ namespace FinalProject.BusinessLayer.Services
                 throw new StatusCodeException(HttpStatusCode.NotFound, $"User with {id} not found");
             }
 
-            var result = await userRepository.UpdateUserInfoAsync(id, new UserInfo
+            await userRepository.UpdateUserInfoAsync(id, new UserInfo
             {
-                Id = userInfoDto.Id,
                 FirstName = userInfoDto.FirstName,
                 LastName = userInfoDto.LastName,
                 PersonalCode = userInfoDto.PersonalCode,
@@ -118,7 +113,67 @@ namespace FinalProject.BusinessLayer.Services
                 Email = userInfoDto.Email,
             } );
 
-            return result;
+        }
+
+        public async Task UpdateUserAddressDtoAsync(int id, UserAddressDto userAddressDto)
+        {
+            var user = await userRepository.GetUserByUserLightIdAsync(id);
+            if (user == null)
+            {
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"User with {id} not found");
+            }
+
+            await userRepository.UpdateUserAddressAsync(id, new Address
+            {
+                
+                City = userAddressDto.City,
+                Street = userAddressDto.Street,
+                HouseNumber = userAddressDto.HouseNumber,
+                ApartamentNumber = userAddressDto.ApartamentNumber,
+               
+            });
+        }
+
+        public async Task DeleteUserAsync(int id)
+        {
+            await userRepository.DeleteUserAsync(id);
+        }
+
+        public async Task AddUserInfoDtoAsync(int id, UserInfoDto userInfoDto)
+        {
+            var user = await userRepository.GetUserByUserLightIdAsync(id);
+            if (user == null)
+            {
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"User with {id} not found");
+            }
+
+            await userRepository.AddUserInfoAsync(id, new UserInfo
+            {
+                FirstName = userInfoDto.FirstName,
+                LastName = userInfoDto.LastName,
+                PersonalCode = userInfoDto.PersonalCode,
+                Phone = userInfoDto.Phone,
+                Email = userInfoDto.Email,
+            });
+        }
+
+        public async Task AddUserAddressDtoAsync(int id, UserAddressDto userAddressDto)
+        {
+            var user = await userRepository.GetUserByUserLightIdAsync(id);
+            if (user == null)
+            {
+                throw new StatusCodeException(HttpStatusCode.NotFound, $"User with {id} not found");
+            }
+
+            await userRepository.AddUserAddressAsync(id, new Address
+            {
+
+                City = userAddressDto.City,
+                Street = userAddressDto.Street,
+                HouseNumber = userAddressDto.HouseNumber,
+                ApartamentNumber = userAddressDto.ApartamentNumber,
+
+            });
         }
     }
 }

@@ -22,7 +22,7 @@ namespace FinalProject.DataLayer.Models
         //public byte[] Photo { get; set; }
         public User User { get; set; }
 
-        public Adress Adress { get; set; }
+        public Address Address { get; set; }
 
 
 

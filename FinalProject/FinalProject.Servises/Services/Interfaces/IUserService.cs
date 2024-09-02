@@ -16,7 +16,16 @@ namespace FinalProject.BusinessLayer.Services.Interfaces
 
         public Task<UserDto> GetUserByIdAsync(int id);
 
-        public Task<int> UpdateUserInfoDtoAsync(int id, UserInfoDto userInfoDto);
+        public Task UpdateUserInfoDtoAsync(int id, UserInfoDto userInfoDto);
+
+        public Task UpdateUserAddressDtoAsync(int id, UserAddressDto userAddressDto);
+
+        public Task DeleteUserAsync(int id);
+
+        public Task AddUserInfoDtoAsync(int id, UserInfoDto userInfoDto);
+
+        public Task AddUserAddressDtoAsync(int id, UserAddressDto userAddressDto);
+
 
     }
 }

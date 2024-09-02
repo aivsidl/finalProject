@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject.BusinessLayer.Models
 {
-    public class UserAdressDto
+    public class UserAddressDto
     {
         public int Id { get; set; }      
 

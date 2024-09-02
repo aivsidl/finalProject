@@ -25,7 +25,8 @@ namespace FinalProject.BusinessLayer.Models
 
         //public byte[] Photo { get; set; }       
 
-        public UserAdressDto UserAdressDto { get; set; }
+        public UserDto UserDto { get; set; }
+        public UserAddressDto UserAdressDto { get; set; }
 
     }
 }

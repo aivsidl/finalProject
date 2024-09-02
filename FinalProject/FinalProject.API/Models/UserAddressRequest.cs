@@ -1,6 +1,6 @@
 ﻿namespace FinalProject.API.Models
 {
-    public class UserAdressRequest
+    public class UserAddressRequest
     {
       
         public string City { get; set; }

@@ -12,7 +12,15 @@ namespace FinalProject.DataLayer.Repositories.Interfaces
 
         public Task<User> GetUserByUserLightIdAsync(int id);
 
-        public Task<int> UpdateUserInfoAsync (int id, UserInfo userInfo);
+        public Task UpdateUserInfoAsync (int id, UserInfo userInfo);
+
+        public Task UpdateUserAddressAsync(int id, Address address);
+
+        public Task DeleteUserAsync(int id);
+
+        public Task AddUserInfoAsync(int id, UserInfo userInfo);
+
+        public Task AddUserAddressAsync(int id, Address address);
 
 
     }
